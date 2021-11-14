@@ -24,7 +24,7 @@ const routes = [
   {
     path:'/detailsResult/:id',
     name: 'detailsResult',
-    component: () => import('@/views/pages/home/DetailsResult.vue'),
+    component: () => import('@/views/pages/home/demos/DetailsResult.vue'),
     meta: {
       layout: 'blank',
     },
@@ -32,7 +32,7 @@ const routes = [
   {
     path:'/homeTransaction',
     name: 'homeTransaction',
-    component: () => import('@/views/pages/home/HomeTransaction.vue'),
+    component: () => import('@/views/pages/home/demos/HomeTransaction.vue'),
     meta: {
       layout: 'blank',
     },
@@ -40,7 +40,15 @@ const routes = [
   {
     path:'/homeDeposit',
     name: 'homeDeposit',
-    component: () => import('@/views/pages/home/HomeDeposit.vue'),
+    component: () => import('@/views/pages/home/demos/HomeDeposit.vue'),
+    meta: {
+      layout: 'blank',
+    },
+  },
+  {
+    path:'/homeProfileSettings',
+    name: 'homeProfileSettings',
+    component: () => import('@/views/pages/home/demos/HomeProfileSettings.vue'),
     meta: {
       layout: 'blank',
     },
@@ -48,7 +56,7 @@ const routes = [
   {
     path:'/homeHistory',
     name: 'homeHistory',
-    component: () => import('@/views/pages/home/HomeHistory.vue'),
+    component: () => import('@/views/pages/home/demos/HomeHistory.vue'),
     meta: {
       layout: 'blank',
     },

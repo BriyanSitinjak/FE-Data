@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import HomeHeader from '@/views/pages/home/HomeHeader.vue'
+import HomeHeader from '@/views/pages/home/demos/HomeHeader.vue'
 import {mdiMagnify} from '@mdi/js'
 
 export default {

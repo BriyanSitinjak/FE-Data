@@ -82,7 +82,7 @@
 <script>
 
 import { mdiHome, mdiViewDashboard } from '@mdi/js'
-import HomeProfile from '@/views/pages/home/HomeProfile.vue'
+import HomeProfile from '@/views/pages/home/demos/HomeProfile.vue'
 
 export default {
   data: () => ({

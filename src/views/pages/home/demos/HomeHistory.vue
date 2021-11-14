@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import HomeHeader from './HomeHeader.vue'
+import HomeHeader from '@/views/pages/home/demos/HomeHeader.vue'
   const COLORS = [
     'info',
     'warning',

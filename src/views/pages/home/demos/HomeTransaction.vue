@@ -41,7 +41,7 @@
 
 <script>
 import { mdiSquareEditOutline, mdiDotsVertical } from '@mdi/js'
-import HomeHeader from '@/views/pages/home/HomeHeader.vue'
+import HomeHeader from '@/views/pages/home/demos/HomeHeader.vue'
 
 export default {
   components: { HomeHeader },

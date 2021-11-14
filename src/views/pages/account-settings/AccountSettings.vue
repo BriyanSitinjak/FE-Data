@@ -34,7 +34,7 @@ import { ref } from '@vue/composition-api'
 // demos
 import AccountSettingsAccount from './AccountSettingsAccount.vue'
 import AccountSettingsSecurity from './AccountSettingsSecurity.vue'
-import AccountSettingsInfo from './AccountSettingsInfo.vue'
+// import AccountSettingsInfo from './AccountSettingsInfo.vue'
 
 export default {
   components: {

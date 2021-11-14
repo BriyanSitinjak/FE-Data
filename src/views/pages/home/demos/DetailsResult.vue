@@ -143,7 +143,7 @@
 
 
 <script>
-import HomeHeader from '@/views/pages/home/HomeHeader.vue'
+import HomeHeader from '@/views/pages/home/demos/HomeHeader.vue'
 import Swal from 'sweetalert2'
 
 export default {

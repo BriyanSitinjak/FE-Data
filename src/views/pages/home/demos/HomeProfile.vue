@@ -24,7 +24,7 @@
       <v-divider></v-divider>
 
       <!-- Profile -->
-      <v-list-item link :to="{ name: 'pages-account-settings' }">
+      <v-list-item link :to="{ name: 'homeProfileSettings' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiAccountOutline }}
