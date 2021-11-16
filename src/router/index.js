@@ -48,7 +48,7 @@ const routes = [
   {
     path:'/homeProfileSettings',
     name: 'homeProfileSettings',
-    component: () => import('@/views/pages/home/demos/HomeProfileSettings.vue'),
+    component: () => import('@/views/pages/home/profile-settings/HomeProfileSettings.vue'),
     meta: {
       layout: 'blank',
     },

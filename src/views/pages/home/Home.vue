@@ -4,7 +4,7 @@
     <v-parallax 
     dark
     src="@/assets/images/pages/bg-home.jpg"
-    height="750">
+    height="850">
       <v-row align="center" justify="center">
         <v-col>
           <v-row align="center" justify="center">
