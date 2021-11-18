@@ -23,6 +23,18 @@
 
       <v-divider></v-divider>
 
+      <!-- Home Home
+      <v-list-item link :to="{ name: 'home' }">
+        <v-list-item-icon class="me-2">
+          <v-icon size="22">
+            {{ icons.mdiHome}}
+          </v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Home</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item> -->
+
       <!-- Profile -->
       <v-list-item link :to="{ name: 'homeProfileSettings' }">
         <v-list-item-icon class="me-2">
@@ -35,7 +47,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <!-- Transaction -->
+      <!-- Transaction
       <v-list-item link :to="{ name: 'homeTransaction' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
@@ -45,7 +57,7 @@
         <v-list-item-content>
           <v-list-item-title>Transaction</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <!-- Deposit -->
       <v-list-item link :to="{ name: 'homeDeposit' }">
@@ -71,7 +83,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <!-- Chat -->
+      <!-- Chat
       <v-list-item link>
         <v-list-item-icon class="me-2">
           <v-icon size="22">
@@ -85,11 +97,11 @@
         <v-list-item-action>
           <v-badge inline color="error" content="2"> </v-badge>
         </v-list-item-action>
-      </v-list-item>
+      </v-list-item> -->
 
       <v-divider class="my-2"></v-divider>
 
-      <!-- Settings -->
+      <!-- Settings
       <v-list-item link>
         <v-list-item-icon class="me-2">
           <v-icon size="22">
@@ -99,7 +111,7 @@
         <v-list-item-content>
           <v-list-item-title>Settings</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <!-- Theme Switcher -->
       <v-list-item link
@@ -116,7 +128,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <!-- Pricing -->
+      <!-- Pricing
       <v-list-item link>
         <v-list-item-icon class="me-2">
           <v-icon size="22">
@@ -126,9 +138,9 @@
         <v-list-item-content>
           <v-list-item-title>Pricing</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
-      <!-- FAQ -->
+      <!-- FAQ
       <v-list-item link>
         <v-list-item-icon class="me-2">
           <v-icon size="22">
@@ -138,7 +150,7 @@
         <v-list-item-content>
           <v-list-item-title>FAQ</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <v-divider class="my-2"></v-divider>
 
@@ -171,6 +183,7 @@ import {
   mdiWeatherSunny,
   mdiCashMultiple,
   mdiHistory,
+  mdiHome,
 } from '@mdi/js'
 import ThemeSwitcher from '@/layouts/components/ThemeSwitcher.vue'
 
@@ -193,6 +206,7 @@ export default {
         mdiWeatherSunny,
         mdiCashMultiple,
         mdiHistory,
+        mdiHome,
       },
       user: {
         data,

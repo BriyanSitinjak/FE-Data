@@ -5,7 +5,6 @@
       v-model="drawer"
       app
       temporary
-      dark
       src="@/assets/images/misc/triangle-dark.png">
       <v-list>
         <v-list-item>
@@ -13,9 +12,9 @@
             <img src="@/assets/images/logos/logo_192.png" alt="Logo" />
           </v-list-item-avatar>
 
-          <v-list-item-content>
+          <!-- <v-list-item-content>
             <v-list-item-title class="title">192</v-list-item-title>
-          </v-list-item-content>
+          </v-list-item-content> -->
         </v-list-item>
       </v-list>
 
@@ -47,9 +46,9 @@
       :flat="flat"
       class="px-15"
       :class="{ expand: flat }">
-      <v-toolbar-title>
+      <router-link to="home">
         <v-img src="@/assets/images/logos/logo_192.png" max-width="50px" />
-      </v-toolbar-title>
+      </router-link>
       
       <v-spacer />
 
