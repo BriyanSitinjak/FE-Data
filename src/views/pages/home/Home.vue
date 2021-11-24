@@ -1,11 +1,14 @@
 <template>
   <section id="hero">
-    <home-header></home-header>
     <v-row align="center" justify="center">
       <v-col>
         <v-row align="center" justify="center">
           <v-col cols="12" md="12" xl="8">
-            <h2 id="titleHome" class="display-1 font-weight-bold text-center mt-16">
+            <h2 id="titleHome" class="display-1 font-weight-bold text-center mt-16 hidden-xs-only">
+              Work Wisely,Do Business Wisely <br />
+              For A Bright Future
+            </h2>
+            <h2 id="titleHome" class="headline font-weight-bold text-center mt-16 hidden-sm-and-up">
               Work Wisely,Do Business Wisely <br />
               For A Bright Future
             </h2>
@@ -16,7 +19,7 @@
               outlined
               class="app-bar-search flex-grow-0 mt-10 px-12 py-10"
               :prepend-inner-icon="icons.mdiMagnify"
-              placeholder="Nama..."
+              placeholder="Search Name..."
               v-model="searchText"
               @keyup.enter="search()"
             >
@@ -27,10 +30,10 @@
     </v-row>
     <v-row v-if="!repository[0]" id="hide" class="mt-10">
       <v-col cols="12" md="4">
-        <home-congratulation-user v-bind:userProfile="userProfile"></home-congratulation-user>
+        <dashboard-congratulation-user v-bind:userProfile="userProfile"></dashboard-congratulation-user>
       </v-col>
       <v-col cols="12" md="8">
-    <home-statistics-card></home-statistics-card>
+        <dashboard-statistics-card></dashboard-statistics-card>
       </v-col>
     </v-row>
     <v-simple-table>
@@ -97,10 +100,9 @@
 
 <script>
 import { mdiMagnify } from '@mdi/js'
-import HomeCongratulationUser from '@/views/pages/home/demos/HomeCongratulationUser.vue'
-import HomeStatisticsCard from '@/views/pages/home/demos/HomeStatisticsCard.vue'
-import HomeHeader from '@/views/pages/home/demos/HomeHeader.vue'
-import Pagination from '@/views/pages/home/demos/Pagination.vue'
+import DashboardCongratulationUser from './widget/DashboardCongratulationUser.vue'
+import DashboardStatisticsCard from './widget/DashboardStatisticsCard.vue'
+import Pagination from './widget/Pagination.vue'
 import crypto from 'crypto'
 import Swal from 'sweetalert2'
 
@@ -110,9 +112,8 @@ const iv = crypto.randomBytes(16)
 
 export default {
   components: {
-    HomeCongratulationUser,
-    HomeStatisticsCard,
-    HomeHeader,
+    DashboardCongratulationUser,
+    DashboardStatisticsCard,
     Pagination,
   },
   data() {

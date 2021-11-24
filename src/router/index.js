@@ -6,7 +6,22 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: 'dashboard',
+    redirect: 'home',
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/pages/home/Home.vue'),
+  },
+  {
+    path: '/deposit',
+    name: 'deposit',
+    component: () => import('@/views/deposit/Deposit.vue'),
+  },
+  {
+    path: '/data-details/:id',
+    name: 'data-details',
+    component: () => import('@/views/pages/home/DetailResult.vue'),
   },
   {
     path: '/dashboard',
@@ -14,52 +29,14 @@ const routes = [
     component: () => import('@/views/dashboard/Dashboard.vue'),
   },
   {
-    path:'/home',
-    name: 'home',
-    component: () => import('@/views/pages/home/Home.vue'),
-    meta: {
-      layout: 'blank',
-    },
+    path: '/transaction',
+    name: 'transaction',
+    component: () => import('@/views/transaction/Transaction.vue'),
   },
   {
-    path:'/detailsResult/:id',
-    name: 'detailsResult',
-    component: () => import('@/views/pages/home/demos/DetailsResult.vue'),
-    meta: {
-      layout: 'blank',
-    },
-  },
-  {
-    path:'/homeTransaction',
-    name: 'homeTransaction',
-    component: () => import('@/views/pages/home/demos/HomeTransaction.vue'),
-    meta: {
-      layout: 'blank',
-    },
-  },
-  {
-    path:'/homeDeposit',
-    name: 'homeDeposit',
-    component: () => import('@/views/pages/home/demos/HomeDeposit.vue'),
-    meta: {
-      layout: 'blank',
-    },
-  },
-  {
-    path:'/homeProfileSettings',
-    name: 'homeProfileSettings',
-    component: () => import('@/views/pages/home/profile-settings/HomeProfileSettings.vue'),
-    meta: {
-      layout: 'blank',
-    },
-  },
-  {
-    path:'/homeHistory',
-    name: 'homeHistory',
-    component: () => import('@/views/pages/home/demos/HomeHistory.vue'),
-    meta: {
-      layout: 'blank',
-    },
+    path: '/transactionDetail/:id',
+    name: 'transactionDetail',
+    component: () => import('@/views/transaction/TransactionDetail.vue'),
   },
   {
     path: '/typography',
@@ -80,37 +57,6 @@ const routes = [
     path: '/simple-table',
     name: 'simple-table',
     component: () => import('@/views/simple-table/SimpleTable.vue'),
-  },
-
-  {
-    path: '/repositoryDashboard',
-    name: 'repositoryDashboard',
-    component: () => import('@/views/repository/SimpleTableDashboard.vue'),
-  },
-  {
-    path: '/repository/:id',
-    name: 'repository',
-    component: () => import('@/views/repository/SimpleTable.vue'),
-  },
-  {
-    path: '/repositoryDetail/:id',
-    name: 'repositoryDetail',
-    component: () => import('@/views/repository/Repository-detail.vue'),
-  },
-  {
-    path: '/repositorySearch',
-    name: 'repositorySearch',
-    component: () => import('@/views/repository/SimpleTableSearch.vue'),
-  },
-  {
-    path: '/transaction',
-    name: 'transaction',
-    component: () => import('@/views/transaction/Transaction.vue'),
-  },
-  {
-    path: '/manage-admin',
-    name: 'manage-admin',
-    component: () => import('@/views/manage-admin/ManageAdmin.vue'),
   },
   {
     path: '/form-layouts',

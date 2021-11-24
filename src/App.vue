@@ -10,13 +10,15 @@ import { computed } from '@vue/composition-api'
 import { useRouter } from '@/utils'
 import LayoutBlank from '@/layouts/Blank.vue'
 import LayoutContent from '@/layouts/Content.vue'
-import UpgradeToPro from './components/UpgradeToPro.vue'
+import Login from '@/views/pages/Login.vue'
+// import UpgradeToPro from './components/UpgradeToPro.vue'
 
 export default {
   components: {
     LayoutBlank,
     LayoutContent,
-    UpgradeToPro,
+    Login,
+    // UpgradeToPro,
   },
   setup() {
     const { route } = useRouter()

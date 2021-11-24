@@ -65,7 +65,7 @@ $material-light: map-deep-merge(
     'text': (
       'primary': rgba($primary-shade--light, 0.87),
       'secondary': rgba($primary-shade--light, 0.6),
-      'disabled': rgba($primary-shade--light, 0.38),
+      'disabled': rgba($primary-shade--light, 0.87),
     ),
     'icons': (
       'active': rgba($primary-shade--light, 0.54),
@@ -199,7 +199,7 @@ $material-dark: map-deep-merge(
       'theme': $primary-shade--dark,
       'primary': $primary-shade--dark,
       'secondary': rgba($primary-shade--dark, 0.7),
-      'disabled': rgba($primary-shade--dark, 0.5),
+      'disabled': rgba($primary-shade--dark, 1),
     ),
     'icons': (
       'active': $primary-shade--dark,

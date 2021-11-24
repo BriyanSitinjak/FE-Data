@@ -5,7 +5,7 @@
         <v-img :src="accountDataLocale.avatarImg"></v-img>
       </v-avatar>
 
-      <!-- Upload Photo -->
+      <!-- upload photo -->
       <div>
         <v-btn color="primary" class="me-3 mt-5" @click="$refs.refInputEl.click()">
           <v-icon class="d-sm-none">
@@ -21,29 +21,31 @@
       </div>
     </v-card-text>
 
-    <!-- Bio User Detail -->
     <v-card-text>
       <v-form class="multi-col-validation mt-6">
         <v-row>
           <v-col md="6" cols="12">
-            <v-text-field v-model="user.data.name" label="Name" dense outlined></v-text-field>
+            <v-text-field v-model="user.data.name" label="Name" dense outlined disabled></v-text-field>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-text-field v-model="user.data.email" label="E-mail" dense outlined></v-text-field>
-          </v-col>
-
-          <!-- <v-col cols="12" md="6">
-            <v-text-field v-model="user.data.type" dense label="Type" outlined></v-text-field>
+            <v-text-field v-model="user.data.email" label="E-mail" dense outlined disabled></v-text-field>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-select v-model="accountDataLocale.status" dense outlined label="Status" :items="status"></v-select>
+            <v-text-field v-model="user.data.type" dense label="Type" outlined disabled></v-text-field>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-text-field v-model="accountDataLocale.company" dense outlined label="Company"></v-text-field>
-          </v-col> -->
+            <v-select
+              v-model="accountDataLocale.status"
+              dense
+              outlined
+              label="Status"
+              :items="status"
+              disabled
+            ></v-select>
+          </v-col>
 
           <!-- alert -->
 
@@ -63,12 +65,15 @@
               </div>
             </v-alert>
           </v-col>
+
+          <v-col cols="12">
+            <v-btn color="primary" class="me-3 mt-4"> Save changes </v-btn>
+            <v-btn color="secondary" outlined class="mt-4" type="reset" @click.prevent="resetForm"> Cancel </v-btn>
+          </v-col>
         </v-row>
       </v-form>
     </v-card-text>
   </v-card>
-
-
 </template>
 
 <script>
@@ -96,7 +101,7 @@ export default {
     }
   },
   setup(props) {
-    // const status = ['Active', 'Inactive', 'Pending', 'Closed']
+    const status = ['Active', 'Inactive', 'Pending', 'Closed']
     const data = JSON.parse(localStorage.getItem('user')) || []
 
     const accountDataLocale = ref(JSON.parse(JSON.stringify(props.accountData)))
@@ -106,7 +111,7 @@ export default {
     }
 
     return {
-      // status,
+      status,
       accountDataLocale,
       resetForm,
       icons: {

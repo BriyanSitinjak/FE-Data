@@ -1,33 +1,42 @@
 <template>
   <v-form class="multi-col-validation">
     <v-row>
-      <v-col cols="12" md="6">
-        <v-text-field v-model="email" label="Email" outlined dense placeholder="Email" hide-details></v-text-field>
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select v-model="amount" :items="items" label="Select Amount" dense outlined>
+          <template #[`item`]="{ item }">
+            {{ ` ${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item)}` }}
+          </template>
+        </v-select>
       </v-col>
-
-      <v-col cols="12" md="6">
-        <v-text-field v-model="name" label="Name" outlined dense placeholder="Name" hide-details></v-text-field>
-      </v-col>
-
-      <!-- <v-col cols="12" md="6">
-        <v-text-field v-model="email" label="Email" outlined dense hide-details type="password"></v-text-field>
-      </v-col> -->
       <v-col cols="12" md="6">
         <v-text-field
-          v-model="password"
+          v-model="userProfile.balance"
+          label="Balance"
           outlined
-          :type="isPasswordVisible ? 'text' : 'password'"
-          label="Password"
-          placeholder="············"
-          :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
+          dense
+          placeholder="Balance"
           hide-details
-          @click:append="isPasswordVisible = !isPasswordVisible"
+          disabled
+        ></v-text-field>
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-text-field v-model="userProfile.email" label="Email" outlined dense hide-details disabled></v-text-field>
+      </v-col>
+
+      <v-col cols="12" md="6">
+        <v-text-field
+          v-model="userProfile.name"
+          label="Name"
+          outlined
+          dense
+          placeholder="Name"
+          hide-details
+          disabled
         ></v-text-field>
       </v-col>
 
       <v-col cols="12">
-        <v-btn color="primary" @click="registerStaff()"> Register </v-btn>
-        <v-btn type="reset" outlined class="mx-2"> Reset </v-btn>
+        <v-btn color="primary" @click="depositRequest()"> DEPOSIT </v-btn>
       </v-col>
     </v-row>
   </v-form>
@@ -40,20 +49,24 @@ import Swal from 'sweetalert2'
 
 export default {
   props: {
-    listAdmin: {
-      type: Array,
+    userProfile: {
+      type: Object,
     },
   },
-  setup() {
-    const name = ref('')
-    const email = ref('')
-    const password = ref('')
-    const isPasswordVisible = ref(false)
-
+  created: async function () {
+    console.log(this.userProfile)
+  },
+  data() {
     return {
-      name,
-      email,
-      password,
+      cobain: 'verry',
+      items: [50000, 100000, 500000, 1000000],
+    }
+  },
+  setup() {
+    const amount = ref('')
+    const isPasswordVisible = ref(false)
+    return {
+      amount,
       isPasswordVisible,
 
       icons: {
@@ -63,14 +76,12 @@ export default {
     }
   },
   methods: {
-    async registerStaff() {
-      const url = process.env.VUE_APP_URL + 'staff/register'
-      const token = localStorage.getItem('token').toString()
+    async depositRequest() {
+      const url = process.env.VUE_APP_URL + 'user/deposit/request'
+      const token = localStorage.getItem('tokenUser').toString()
 
       const body = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
+        amount: this.amount,
       }
       const requestOptions = {
         method: 'POST',
@@ -79,19 +90,21 @@ export default {
       }
       const response = await fetch(url, requestOptions)
       const data = await response.json()
-      console.log('respon register ', data)
       if (data.statusCode === 201) {
         //SET User Local Storage
         Swal.fire({
           // position: 'top-end',
           icon: 'success',
           title: 'Success',
-          text: 'Success Add staff!',
+          text: 'Deposit submitted!',
           showConfirmButton: false,
           timer: 1500,
         })
         // Refresh table list staff
         this.$emit('refreshList')
+
+        //Send email success deposit to user
+        //
       } else {
         Swal.fire({
           icon: 'error',

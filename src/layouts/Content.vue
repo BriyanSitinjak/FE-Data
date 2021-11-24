@@ -1,27 +1,24 @@
 <template>
   <v-app>
-    <vertical-nav-menu :is-drawer-open.sync="isDrawerOpen"></vertical-nav-menu>
+    <!-- <vertical-nav-menu :is-drawer-open.sync="isDrawerOpen"></vertical-nav-menu> -->
 
-    <v-app-bar app flat absolute color="transparent">
+    <v-app-bar app flat fixed hide-on-scroll color="transparent">
       <div class="boxed-container w-full">
         <div class="d-flex align-center mx-6">
           <!-- Left Content -->
-          <v-app-bar-nav-icon class="d-block d-lg-none me-2" @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
-          <v-text-field
-            rounded
-            dense
-            outlined
-            :prepend-inner-icon="icons.mdiMagnify"
-            class="app-bar-search flex-grow-0"
-            hide-details
-            placeholder="Search"
-            v-model="searchText"
-            @keyup.enter="search()"
-          ></v-text-field>
+          <a href="/" rel="nofollow">
+            <v-icon class="ms-6 me-4">
+              {{ icons.mdiHomeOutline }}
+            </v-icon>
+          </a>
+          <v-btn icon small class="ms-3" href="/" rel="nofollow">
+            <h3 class="app-title text--primary hidden-sm-and-down">Home</h3>
+          </v-btn>
           <v-spacer></v-spacer>
 
           <!-- Right Content -->
-          <a
+
+          <!-- <a
             href="https://github.com/themeselection/materio-vuetify-vuejs-admin-template-free"
             target="_blank"
             rel="nofollow"
@@ -29,13 +26,22 @@
             <v-icon class="ms-6 me-4">
               {{ icons.mdiGithub }}
             </v-icon>
-          </a>
+          </a> -->
           <theme-switcher></theme-switcher>
-          <v-btn icon small class="ms-3">
+          <v-btn
+            icon
+            small
+            class="ms-6 me-6"
+            :key="$vuetify.theme.dark"
+            @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+          >
+            <h3 class="app-title text--primary hidden-sm-and-down">Theme</h3>
+          </v-btn>
+          <!-- <v-btn icon small class="ms-3">
             <v-icon>
               {{ icons.mdiBellOutline }}
             </v-icon>
-          </v-btn>
+          </v-btn> -->
           <app-bar-user-menu></app-bar-user-menu>
         </div>
       </div>
@@ -79,7 +85,7 @@
 
 <script>
 import { ref } from '@vue/composition-api'
-import { mdiMagnify, mdiBellOutline, mdiGithub } from '@mdi/js'
+import { mdiMagnify, mdiBellOutline, mdiGithub, mdiHomeOutline } from '@mdi/js'
 import VerticalNavMenu from './components/vertical-nav-menu/VerticalNavMenu.vue'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
 import AppBarUserMenu from './components/AppBarUserMenu.vue'
@@ -89,11 +95,7 @@ export default {
     VerticalNavMenu,
     ThemeSwitcher,
     AppBarUserMenu,
-  },
-  data() {
-    return {
-      searchText: '',
-    }
+    mdiHomeOutline,
   },
   setup() {
     const isDrawerOpen = ref(null)
@@ -106,13 +108,9 @@ export default {
         mdiMagnify,
         mdiBellOutline,
         mdiGithub,
+        mdiHomeOutline,
       },
     }
-  },
-  methods: {
-    search() {
-      this.$router.push({ name: 'repositorySearch', query: { nama: `${this.searchText}`, page: 1 } })
-    },
   },
 }
 </script>

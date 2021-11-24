@@ -9,22 +9,22 @@
             class="d-flex align-center"
           >
             <v-img
-              :src="require('@/assets/images/logos/logo_192.png')"
-              max-height="150px"
-              max-width="150px"
+              :src="require('@/assets/images/logos/logo.svg')"
+              max-height="30px"
+              max-width="30px"
               alt="logo"
               contain
               class="me-3 "
             ></v-img>
 
-            <!-- <h2 class="text-2xl font-weight-semibold">
+            <h2 class="text-2xl font-weight-semibold">
               Materio
-            </h2> -->
+            </h2>
           </router-link>
         </v-card-title>
 
         <!-- title -->
-        <v-card-text class="text-center">
+        <v-card-text>
           <p class="text-2xl font-weight-semibold text--primary mb-2">
             Adventure starts here 🚀
           </p>

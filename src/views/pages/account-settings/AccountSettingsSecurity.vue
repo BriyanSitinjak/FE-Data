@@ -1,22 +1,15 @@
 <template>
-  <v-card
-    flat
-    class="mt-5"
-  >
+  <v-card flat class="mt-5">
     <v-form>
       <div class="px-3">
         <v-card-text class="pt-5">
           <v-row>
-            <v-col
-              cols="12"
-              sm="12"
-              md="12"
-            >
+            <v-col cols="12" sm="8" md="6">
               <!-- current password -->
               <v-text-field
                 v-model="currentPassword"
                 :type="isCurrentPasswordVisible ? 'text' : 'password'"
-                :append-icon="isCurrentPasswordVisible ? icons.mdiEyeOffOutline:icons.mdiEyeOutline"
+                :append-icon="isCurrentPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
                 label="Current Password"
                 outlined
                 dense
@@ -27,7 +20,7 @@
               <v-text-field
                 v-model="newPassword"
                 :type="isNewPasswordVisible ? 'text' : 'password'"
-                :append-icon="isNewPasswordVisible ? icons.mdiEyeOffOutline:icons.mdiEyeOutline"
+                :append-icon="isNewPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
                 label="New Password"
                 outlined
                 dense
@@ -40,7 +33,7 @@
               <v-text-field
                 v-model="cPassword"
                 :type="isCPasswordVisible ? 'text' : 'password'"
-                :append-icon="isCPasswordVisible ? icons.mdiEyeOffOutline:icons.mdiEyeOutline"
+                :append-icon="isCPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
                 label="Confirm New Password"
                 outlined
                 dense
@@ -49,19 +42,14 @@
               ></v-text-field>
             </v-col>
 
-            <!-- <v-col
-              cols="12"
-              sm="4"
-              md="6"
-              class="d-none d-sm-flex justify-center position-relative"
-            >
+            <v-col cols="12" sm="4" md="6" class="d-none d-sm-flex justify-center position-relative">
               <v-img
                 contain
                 max-width="170"
                 src="@/assets/images/3d-characters/pose-m-1.png"
                 class="security-character"
               ></v-img>
-            </v-col> -->
+            </v-col>
           </v-row>
         </v-card-text>
       </div>
@@ -75,47 +63,26 @@
             {{ icons.mdiKeyOutline }}
           </v-icon>
           <span class="text-break">Two-factor authentication</span>
-        </v-card-title> -->
+        </v-card-title>
 
-        <!-- <v-card-text class="two-factor-auth text-center mx-auto">
-          <v-avatar
-            color="primary"
-            class="primary mb-4"
-            rounded
-          >
-            <v-icon
-              size="25"
-              color="white"
-            >
+        <v-card-text class="two-factor-auth text-center mx-auto">
+          <v-avatar color="primary" class="primary mb-4" rounded>
+            <v-icon size="25" color="white">
               {{ icons.mdiLockOpenOutline }}
             </v-icon>
           </v-avatar>
-          <p class="text-base text--primary font-weight-semibold">
-            Two factor authentication is not enabled yet.
-          </p>
+          <p class="text-base text--primary font-weight-semibold">Two factor authentication is not enabled yet.</p>
           <p class="text-sm text--primary">
-            Two-factor authentication adds an additional layer of
-            security to your account by requiring more than just a
+            Two-factor authentication adds an additional layer of security to your account by requiring more than just a
             password to log in. Learn more.
           </p>
         </v-card-text> -->
 
         <!-- action buttons -->
-        <!-- <v-card-text>
-          <v-btn
-            color="primary"
-            class="me-3 mt-3"
-          >
-            Save changes
-          </v-btn>
-          <v-btn
-            color="secondary"
-            outlined
-            class="mt-3"
-          >
-            Cancel
-          </v-btn>
-        </v-card-text> -->
+        <v-card-text>
+          <v-btn color="primary" class="me-3 mt-3" @click="save()"> Save changes </v-btn>
+          <v-btn color="secondary" outlined class="mt-3"> Cancel </v-btn>
+        </v-card-text>
       </div>
     </v-form>
   </v-card>
@@ -125,6 +92,7 @@
 // eslint-disable-next-line object-curly-newline
 import { mdiKeyOutline, mdiLockOpenOutline, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import { ref } from '@vue/composition-api'
+import Swal from 'sweetalert2'
 
 export default {
   setup() {
@@ -149,6 +117,43 @@ export default {
         mdiEyeOutline,
       },
     }
+  },
+  methods: {
+    save: async function () {
+      //clear data
+      this.userProfile = {}
+      let url = process.env.VUE_APP_URL + 'user/profile/update'
+      const token = localStorage.getItem('tokenUser').toString()
+      const body = {
+        oldPassword: this.currentPassword,
+        password: this.newPassword,
+        passwordConfirmation: this.cPassword,
+      }
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify(body),
+      }
+      const response = await fetch(url, requestOptions)
+      const dataResponse = await response.json()
+
+      if (dataResponse.statusCode === 201) {
+        Swal.fire({
+          // position: 'top-end',
+          icon: 'success',
+          title: 'Success',
+          text: 'Update sucessful!',
+          showConfirmButton: false,
+          timer: 1000,
+        })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          text: dataResponse.message,
+        })
+      }
+    },
   },
 }
 </script>

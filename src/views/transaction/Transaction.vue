@@ -1,9 +1,34 @@
 <template>
-  <v-row>
+  <v-card id="account-setting-card">
+    <!-- tabs -->
+    <v-tabs v-model="tab" show-arrows>
+      <v-tab v-for="tab in tabs" :key="tab.icon">
+        <v-icon size="20" class="me-3">
+          {{ tab.icon }}
+        </v-icon>
+        <span>{{ tab.title }}</span>
+      </v-tab>
+    </v-tabs>
+
+    <!-- tabs item -->
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <transaction-all v-bind:transactionAllList="transactionAllList"></transaction-all>
+      </v-tab-item>
+
+      <v-tab-item>
+        <transaction-request></transaction-request>
+      </v-tab-item>
+      <!-- <v-tab-item>
+        <account-settings-info :information-data="accountSettingData.information"></account-settings-info>
+      </v-tab-item> -->
+    </v-tabs-items>
+  </v-card>
+  <!-- <v-row>
     <v-col cols="12">
       <dashboard-datatable></dashboard-datatable>
     </v-col>
-  </v-row>
+  </v-row> -->
 </template>
 
 <script>
@@ -11,88 +36,70 @@
 import { mdiPoll, mdiLabelVariantOutline, mdiCurrencyUsd, mdiHelpCircleOutline } from '@mdi/js'
 
 // demos
-import DashboardDatatable from './DashboardDatatable.vue'
 import Swal from 'sweetalert2'
+import TransactionAll from './demo/TransactionAll.vue'
+import { mdiAccountOutline, mdiLockOpenOutline, mdiInformationOutline } from '@mdi/js'
+import { ref } from '@vue/composition-api'
 
 export default {
   components: {
-    DashboardDatatable,
+    TransactionAll,
   },
-  mounted: async function () {
-    const url = process.env.VUE_APP_URL + 'staff/profile'
-    const token = localStorage.getItem('token').toString()
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      },
+  data() {
+    return {
+      transactionAllList: [],
     }
-    const response = await fetch(url, requestOptions)
-    const data = await response.json()
-    if (data.statusCode === 200) {
-      // Swal.fire({
-      localStorage.setItem('user', JSON.stringify(data.data))
+  },
+  created: async function () {
+    await this.getDataAllTransaction()
+  },
 
-      //   // position: 'top-end',
-      //   icon: 'success',
-      //   title: 'Check',
-      //   text: data.data.name,
-      //   showConfirmButton: false,
-      //   timer: 1500,
-      // })
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Session Expired',
-        text: 'Please relogin!',
-      })
-    }
-  },
   setup() {
-    const totalProfit = {
-      statTitle: 'Total Profit',
-      icon: mdiPoll,
-      color: 'success',
-      subtitle: 'Weekly Project',
-      statistics: '$25.6k',
-      change: '+42%',
-    }
+    const tab = ref('')
 
-    const totalSales = {
-      statTitle: 'Refunds',
-      icon: mdiCurrencyUsd,
-      color: 'secondary',
-      subtitle: 'Past Month',
-      statistics: '$78',
-      change: '-15%',
-    }
-
-    // vertical card options
-    const newProject = {
-      statTitle: 'New Project',
-      icon: mdiLabelVariantOutline,
-      color: 'primary',
-      subtitle: 'Yearly Project',
-      statistics: '862',
-      change: '-18%',
-    }
-
-    const salesQueries = {
-      statTitle: 'Sales Quries',
-      icon: mdiHelpCircleOutline,
-      color: 'warning',
-      subtitle: 'Last week',
-      statistics: '15',
-      change: '-18%',
-    }
+    const tabs = [
+      { title: 'Transaction All', icon: mdiAccountOutline },
+      // { title: 'Transaction Request', icon: mdiLockOpenOutline },
+      // { title: 'Info', icon: mdiInformationOutline },
+    ]
 
     return {
-      totalProfit,
-      totalSales,
-      newProject,
-      salesQueries,
+      tabs,
+      tab,
+      icons: {
+        mdiAccountOutline,
+        mdiLockOpenOutline,
+        mdiInformationOutline,
+      },
     }
+  },
+  methods: {
+    getDataAllTransaction: async function () {
+      this.transactionAllList = []
+      let url = process.env.VUE_APP_URL + 'user/transaction/getAllTransaction'
+      const token = localStorage.getItem('tokenUser').toString()
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      }
+      fetch(url, requestOptions)
+        .then(async response => {
+          const dataArray = await response.json()
+
+          if (dataArray.statusCode === 200) {
+            dataArray.data.forEach(element => {
+              this.transactionAllList.push(element)
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Failed',
+              text: data.message,
+            })
+          }
+        })
+        .catch(error => console.error(error))
+    },
   },
 }
 </script>

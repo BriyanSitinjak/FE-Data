@@ -8,9 +8,9 @@
         small
         class="me-n3 mt-n2"
       >
-        <v-icon>
+        <!-- <v-icon>
           {{ icons.mdiDotsVertical }}
-        </v-icon>
+        </v-icon> -->
       </v-btn>
     </v-card-title>
 

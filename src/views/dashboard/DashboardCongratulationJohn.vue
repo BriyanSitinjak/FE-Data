@@ -3,20 +3,23 @@
     <v-row class="ma-0 pa-0">
       <v-col cols="8">
         <v-card-title class="text-no-wrap pt-1 ps-2">
-         Hello, {{ user.data.name}} 🥳
+          Congratulations John! 🥳
         </v-card-title>
         <v-card-subtitle class="text-no-wrap ps-2">
-          Your Deposit Remaining
+          You have won Trophy
         </v-card-subtitle>
         <v-card-text class="d-flex align-center mt-2 pb-2 ps-2">
           <div>
             <p class="text-xl font-weight-semibold primary--text mb-2">
-              {{
-                new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(this.userProfile.balance)
-              }}
+              $42.8k
             </p>
 
-            <v-btn small color="primary"> Deposit </v-btn>
+            <v-btn
+              small
+              color="primary"
+            >
+              View Sales
+            </v-btn>
           </div>
         </v-card-text>
       </v-col>
@@ -40,28 +43,6 @@
     </v-row>
   </v-card>
 </template>
-
-<script>
-export default {
-  props: {
-    userProfile: {
-      type: [],
-    },
-  },
-  created: function () {
-    //
-  },
-  setup() {
-    const data = JSON.parse(localStorage.getItem('user')) || []
-    return {
-      user: {
-        data,
-      },
-    }
-  },
-  methods: {},
-}
-</script>
 
 <style lang="scss" scoped>
 .greeting-card {
